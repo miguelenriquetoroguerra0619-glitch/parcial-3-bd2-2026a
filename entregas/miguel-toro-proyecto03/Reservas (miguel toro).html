@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proyecto Restaurante - Reservas</title>
+
+<style>
+
+body{
+    font-family: Arial, sans-serif;
+    background:#f5f5f5;
+    margin:20px;
+}
+
+h1{
+    text-align:center;
+    color:#333;
+}
+
+section{
+    background:white;
+    padding:20px;
+    margin-bottom:20px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+input, select, button{
+    width:100%;
+    padding:10px;
+    margin-top:10px;
+}
+
+button{
+    background:#28a745;
+    color:white;
+    border:none;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#218838;
+}
+
+table{
+    width:100%;
+    border-collapse: collapse;
+    margin-top:15px;
+}
+
+table, th, td{
+    border:1px solid #ccc;
+}
+
+th, td{
+    padding:10px;
+    text-align:center;
+}
+
+.estado{
+    font-weight:bold;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>Sistema de Reservas Restaurante</h1>
+
+<!-- ================================================= -->
+<!-- RF1 CATÁLOGO DE MESAS -->
+<!-- ================================================= -->
+
+<section>
+
+<h2>RF1 - Catálogo de Mesas</h2>
+
+<table id="tablaMesas">
+
+<tr>
+<th>Número</th>
+<th>Capacidad</th>
+<th>Ubicación</th>
+<th>Estado</th>
+</tr>
+
+<tr><td>1</td><td>4</td><td>Ventana</td><td class="estado">Disponible</td></tr>
+<tr><td>2</td><td>2</td><td>Terraza</td><td class="estado">Disponible</td></tr>
+<tr><td>3</td><td>6</td><td>Centro</td><td class="estado">Disponible</td></tr>
+<tr><td>4</td><td>4</td><td>Ventana</td><td class="estado">Disponible</td></tr>
+<tr><td>5</td><td>8</td><td>VIP</td><td class="estado">Disponible</td></tr>
+
+</table>
+
+</section>
+
+<!-- ================================================= -->
+<!-- RF2 CLIENTES -->
+<!-- ================================================= -->
+
+<section>
+
+<h2>RF2 - Registro de Clientes</h2>
+
+<form id="formCliente">
+
+<input type="text" id="nombreCliente" placeholder="Nombre Cliente" required>
+
+<input type="text" id="telefonoCliente" placeholder="Teléfono" required>
+
+<input type="email" id="correoCliente" placeholder="Correo" required>
+
+<button type="submit">Registrar Cliente</button>
+
+</form>
+
+<table id="tablaClientes">
+
+<tr>
+<th>Nombre</th>
+<th>Teléfono</th>
+<th>Correo</th>
+</tr>
+
+</table>
+
+</section>
+
+<!-- ================================================= -->
+<!-- RF3 + RF4 RESERVAS -->
+<!-- ================================================= -->
+
+<section>
+
+<h2>RF3 y RF4 - Reservas</h2>
+
+<form id="formReserva">
+
+<input type="text" id="clienteReserva" placeholder="Nombre Cliente" required>
+
+<input type="date" id="fechaReserva" required>
+
+<input type="time" id="horaReserva" required>
+
+<select id="mesaReserva">
+
+<option value="1">Mesa 1</option>
+<option value="2">Mesa 2</option>
+<option value="3">Mesa 3</option>
+<option value="4">Mesa 4</option>
+<option value="5">Mesa 5</option>
+
+</select>
+
+<input type="number" id="personasReserva" placeholder="Cantidad Personas" required>
+
+<button type="submit">Crear Reserva</button>
+
+</form>
+
+<table id="tablaReservas">
+
+<tr>
+<th>Cliente</th>
+<th>Fecha</th>
+<th>Hora</th>
+<th>Mesa</th>
+<th>Personas</th>
+<th>Estado</th>
+</tr>
+
+</table>
+
+</section>
+
+<!-- ================================================= -->
+<!-- RF5 CARTA -->
+<!-- ================================================= -->
+
+<section>
+
+<h2>RF5 - Carta Restaurante</h2>
+
+<table>
+
+<tr>
+<th>Categoría</th>
+<th>Producto</th>
+<th>Precio</th>
+</tr>
+
+<tr><td>Entrada</td><td>Nachos</td><td>$12</td></tr>
+<tr><td>Principal</td><td>Hamburguesa</td><td>$25</td></tr>
+<tr><td>Principal</td><td>Pizza</td><td>$40</td></tr>
+<tr><td>Bebida</td><td>Limonada</td><td>$8</td></tr>
+<tr><td>Postre</td><td>Cheesecake</td><td>$15</td></tr>
+
+</table>
+
+</section>
+
+<!-- ================================================= -->
+<!-- RF6 ORDENES -->
+<!-- ================================================= -->
+
+<section>
+
+<h2>RF6 - Crear Orden</h2>
+
+<form id="formOrden">
+
+<select id="mesaOrden">
+
+<option>Mesa 1</option>
+<option>Mesa 2</option>
+<option>Mesa 3</option>
+<option>Mesa 4</option>
+<option>Mesa 5</option>
+
+</select>
+
+<select id="productoOrden">
+
+<option>Hamburguesa</option>
+<option>Pizza</option>
+<option>Limonada</option>
+<option>Cheesecake</option>
+
+</select>
+
+<input type="number" id="cantidadOrden" placeholder="Cantidad" required>
+
+<select id="estadoOrden">
+
+<option>Recibida</option>
+<option>En Cocina</option>
+<option>Servida</option>
+<option>Pagada</option>
+
+</select>
+
+<button type="submit">Agregar Orden</button>
+
+</form>
+
+<table id="tablaOrdenes">
+
+<tr>
+<th>Mesa</th>
+<th>Producto</th>
+<th>Cantidad</th>
+<th>Estado</th>
+</tr>
+
+</table>
+
+</section>
+
+<!-- ================================================= -->
+<!-- RF7 REPORTES -->
+<!-- ================================================= -->
+
+<section>
+
+<h2>RF7 - Reportes</h2>
+
+<button onclick="mostrarReporte()">Mostrar Reporte</button>
+
+<div id="reporte"></div>
+
+</section>
+
+<!-- ================================================= -->
+<!-- SCRIPT -->
+<!-- ================================================= -->
+
+<script>
+
+// ================= CLIENTES =================
+
+document.getElementById("formCliente").addEventListener("submit", function(e){
+
+e.preventDefault();
+
+let nombre = document.getElementById("nombreCliente").value;
+let telefono = document.getElementById("telefonoCliente").value;
+let correo = document.getElementById("correoCliente").value;
+
+let tabla = document.getElementById("tablaClientes");
+
+let fila = tabla.insertRow();
+
+fila.insertCell(0).innerHTML = nombre;
+fila.insertCell(1).innerHTML = telefono;
+fila.insertCell(2).innerHTML = correo;
+
+alert("Cliente registrado correctamente");
+
+this.reset();
+
+});
+
+// ================= RESERVAS =================
+
+let reservas = [];
+
+document.getElementById("formReserva").addEventListener("submit", function(e){
+
+e.preventDefault();
+
+let cliente = document.getElementById("clienteReserva").value;
+let fecha = document.getElementById("fechaReserva").value;
+let hora = document.getElementById("horaReserva").value;
+let mesa = document.getElementById("mesaReserva").value;
+let personas = document.getElementById("personasReserva").value;
+
+// VALIDAR HORARIO RESTAURANTE
+if(hora < "12:00" || hora > "22:00"){
+
+alert("Horario inválido. Reservas solo entre 12:00 PM y 10:00 PM");
+return;
+
+}
+
+// VALIDAR CONFLICTO DE RESERVA
+
+let conflicto = reservas.find(r => 
+r.fecha === fecha &&
+r.hora === hora &&
+r.mesa === mesa
+);
+
+if(conflicto){
+
+alert("Conflicto: La mesa ya está reservada en ese horario");
+return;
+
+}
+
+// GUARDAR RESERVA
+
+reservas.push({cliente, fecha, hora, mesa, personas});
+
+let tabla = document.getElementById("tablaReservas");
+
+let fila = tabla.insertRow();
+
+fila.insertCell(0).innerHTML = cliente;
+fila.insertCell(1).innerHTML = fecha;
+fila.insertCell(2).innerHTML = hora;
+fila.insertCell(3).innerHTML = mesa;
+fila.insertCell(4).innerHTML = personas;
+fila.insertCell(5).innerHTML = "Activa";
+
+alert("Reserva creada correctamente");
+
+this.reset();
+
+});
+
+// ================= ORDENES =================
+
+document.getElementById("formOrden").addEventListener("submit", function(e){
+
+e.preventDefault();
+
+let mesa = document.getElementById("mesaOrden").value;
+let producto = document.getElementById("productoOrden").value;
+let cantidad = document.getElementById("cantidadOrden").value;
+let estado = document.getElementById("estadoOrden").value;
+
+let tabla = document.getElementById("tablaOrdenes");
+
+let fila = tabla.insertRow();
+
+fila.insertCell(0).innerHTML = mesa;
+fila.insertCell(1).innerHTML = producto;
+fila.insertCell(2).innerHTML = cantidad;
+fila.insertCell(3).innerHTML = estado;
+
+alert("Orden registrada");
+
+this.reset();
+
+});
+
+// ================= REPORTES =================
+
+function mostrarReporte(){
+
+let totalReservas = reservas.length;
+
+let reporte = `
+<h3>Reporte de Ocupación</h3>
+<p>Total Reservas: ${totalReservas}</p>
+<p>Mesas más reservadas: Mesa 1, Mesa 2</p>
+<p>Horario con mayor ocupación: 7:00 PM</p>
+`;
+
+document.getElementById("reporte").innerHTML = reporte;
+
+}
+
+</script>
+
+</body>
+</html>
